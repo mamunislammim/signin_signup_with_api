@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:signup_signin_ui_design/Authentication/AuthSignUp/sign_up_auth.dart';
+import 'package:signup_signin_ui_design/Screen/third_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -13,12 +14,12 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
-  final TextEditingController _number= TextEditingController();
+  final TextEditingController _number = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-  //  double height = MediaQuery.of(context).size.height;
+    //  double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xff152848),
@@ -29,10 +30,24 @@ class _SignUpState extends State<SignUp> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 40,),
-                Image.asset('image/maan.png',height: 100,width: 200,),
-                const Text("Maan Academy",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
-               const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 40,
+                ),
+                Image.asset(
+                  'image/maan.png',
+                  height: 100,
+                  width: 200,
+                ),
+                const Text(
+                  "Maan Academy",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: AppTextField(
@@ -123,32 +138,37 @@ class _SignUpState extends State<SignUp> {
                 ),
                 InkWell(
                   onTap: () async {
-                    if(_name.text.isEmpty){
+                    if (_name.text.isEmpty) {
                       toast("Please...Enter Name");
-                    }
-                    else if(_email.text.isEmpty){
+                    } else if (_email.text.isEmpty) {
                       toast("Enter Your Email");
-                    }
-                    else if(_number.text.isEmpty){
+                    } else if (_number.text.isEmpty) {
                       toast("Enter Mobile Number");
-                    }
-                    else if(_password.text.isEmpty){
+                    } else if (_password.text.isEmpty) {
                       toast("Please,,,Enter Password");
-                    }
-                    else if(_password.text.length < 6){
+                    } else if (_password.text.length < 6) {
                       toast("Password Must be 6 Digit");
-                    }
-                    else{
-                      var status = await SignUpAuth().SignUpWithData(
-                          _name.text,
-                          _email.text,
-                          _number.text,
-                          _password.text);
-                      if(status){
-                        toast("Sign Up Successful");
-                      }
-                      else{
-                        toast("Error");
+                    } else {
+                      try {
+                        EasyLoading.show(status: "Signing Up");
+                        var status = await SignUpAuth().SignUpWithData(
+                            _name.text,
+                            _email.text,
+                            _number.text,
+                            _password.text);
+                        if (status) {
+                          EasyLoading.showSuccess("SuccessFul..");
+                          toast("Sign Up Successful");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ThirdScreen()));
+                        } else {
+                          EasyLoading.showError("Something Was Wrong");
+                          toast("Error");
+                        }
+                      } catch (e) {
+                        EasyLoading.showError("$e");
                       }
                     }
                   },

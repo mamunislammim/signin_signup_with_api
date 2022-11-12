@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:signup_signin_ui_design/Authentication/AuthSignIn/sign_in_auth.dart';
 import 'package:signup_signin_ui_design/Screen/sign_up.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:signup_signin_ui_design/Screen/third_screen.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -132,12 +134,24 @@ class _SignInState extends State<SignIn> {
                         } else if (_password.text.length < 6) {
                           toast("Password Must be 6 Character");
                         } else {
-                            var status = await SignInAuth().SignInWithMail(_email.text, _password.text);
-                            if(status){
-                              toast("OK");
-                            }
-                            else{
-                              toast("NO");
+                            try{
+                              EasyLoading.show(status: "Sining In");
+                              var status = await SignInAuth().SignInWithMail(_email.text, _password.text);
+                              if(status){
+                                toast("OK");
+                                EasyLoading.showSuccess(" Sining In Successful");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ThirdScreen()));
+                              }
+                              else{
+                                toast("NO");
+                                EasyLoading.showError("Faild");
+                              }
+                            }catch(e){
+                              print(e);
+                              EasyLoading.showError("$e");
                             }
                         }
                       },
