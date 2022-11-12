@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signup_signin_ui_design/Server_Url/const_data.dart';
 import '../../Models/signUpModels/Sign_up_models.dart';
 
@@ -15,9 +16,11 @@ class SignUpAuth{
       'password': password
     });
 
+    final prefs = await SharedPreferences.getInstance();
     var data = jsonDecode(responce.body);
     if(responce.statusCode == 200){
       var message = SignUpModels.fromJson(data);
+      await prefs.setString('token', message.data!.token.toString());
       print("SignUp Message : $message");
       return true;
     }

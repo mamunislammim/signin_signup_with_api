@@ -18,7 +18,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    // double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xff152848),
@@ -30,8 +30,8 @@ class _SignInState extends State<SignIn> {
               height: 20,
             ),
             SizedBox(
-              height: 100,
-              width: 200,
+              height: height/7,
+              width: width/2.3,
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
@@ -42,11 +42,11 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
             ),
-            const Text(
+             Text(
               "Maan Academy",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: width/10,
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -64,22 +64,23 @@ class _SignInState extends State<SignIn> {
                         strokeAlign: StrokeAlign.outside)),
                 color: const Color(0xff050B1E),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 60,
+                      SizedBox(
+                      height: height/10,
                     ),
-                    const Text(
+                     Text(
                       "Login",
                       style: TextStyle(
                           color: Color(0xbaffffff),
-                          fontSize: 33,
+                          fontSize: height/18,
                           fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
-                      height: 50,
+                     SizedBox(
+                      height: height/13,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      padding:   EdgeInsets.only(left: width/10, right: width/10),
                       child: AppTextField(
                         textStyle: const TextStyle(color: Color(0xbaffffff)),
                         controller: _email,
@@ -97,11 +98,11 @@ class _SignInState extends State<SignIn> {
                                 borderSide: const BorderSide(color: grey))),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                      SizedBox(
+                      height: height/50,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      padding:   EdgeInsets.only(left: width/10, right: width/10),
                       child: AppTextField(
                         textStyle: const TextStyle(color: Color(0xbaffffff)),
                         controller: _password,
@@ -122,8 +123,8 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                      SizedBox(
+                      height: height/40,
                     ),
                     InkWell(
                       onTap: () async{
@@ -157,10 +158,10 @@ class _SignInState extends State<SignIn> {
                       },
                       child: Container(
                         padding: EdgeInsets.only(
-                            left: width / 3.3,
-                            top: 13,
-                            bottom: 13,
-                            right: width / 3.3),
+                            left: width / 3.8,
+                            top: height/55,
+                            bottom: height/55,
+                            right: width / 3.8),
                         decoration: BoxDecoration(
                           color: const Color(0xff304F6A),
                           borderRadius: BorderRadius.circular(10),
@@ -173,7 +174,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 8, left: 30, right: 30),
+                            EdgeInsets.only(top: height/50, left: width/8, right: width/8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
