@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:signup_signin_ui_design/Server_Url/const_data.dart';
+import 'package:signup_signin_ui_design/Server_Url/signin_signup_url.dart';
 import '../../Models/signUpModels/Sign_up_models.dart';
 
 class SignUpAuth{
@@ -21,7 +21,7 @@ class SignUpAuth{
     if(responce.statusCode == 200){
       var message = SignUpModels.fromJson(data);
       await prefs.setString('token', message.data!.token.toString());
-      print("SignUp Message : $message");
+      // print("SignUp Message : $message");
       return true;
     }
     else {

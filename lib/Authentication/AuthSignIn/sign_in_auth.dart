@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:nb_utils/nb_utils.dart';
-import 'package:signup_signin_ui_design/Server_Url/const_data.dart';
+import 'package:signup_signin_ui_design/Server_Url/signin_signup_url.dart';
  import '../../Models/signupmodelsss/Signinmod.dart';
 
 class SignInAuth{

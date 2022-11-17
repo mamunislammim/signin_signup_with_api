@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:signup_signin_ui_design/Server_Url/const_data.dart';
+import 'package:signup_signin_ui_design/Server_Url/signin_signup_url.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Models/getDataModel/Get_data_model.dart';

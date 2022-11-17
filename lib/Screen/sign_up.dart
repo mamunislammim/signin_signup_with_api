@@ -4,6 +4,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:signup_signin_ui_design/Authentication/AuthSignUp/sign_up_auth.dart';
 import 'package:signup_signin_ui_design/Screen/third_screen.dart';
 
+import 'latestNews.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -162,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ThirdScreen()));
+                                  builder: (context) =>  LatestNewsPage()));
                         } else {
                           EasyLoading.showError("Something Was Wrong");
                           toast("Error");

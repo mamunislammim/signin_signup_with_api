@@ -3,6 +3,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:signup_signin_ui_design/Screen/sign_in.dart';
 import 'package:signup_signin_ui_design/Screen/third_screen.dart';
 
+import 'latestNews.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     else {
       await Future.delayed(const Duration(seconds: 5))
-          .then((value) => const ThirdScreen().launch(context));
+          .then((value) => const LatestNewsPage().launch(context));
     }
   }
 

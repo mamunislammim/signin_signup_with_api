@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:signup_signin_ui_design/Authentication/AuthSignIn/sign_in_auth.dart';
-import 'package:signup_signin_ui_design/Screen/sign_up.dart';
+ import 'package:signup_signin_ui_design/Screen/sign_up.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:signup_signin_ui_design/Screen/third_screen.dart';
+
+import 'latestNews.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -144,7 +146,7 @@ class _SignInState extends State<SignIn> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ThirdScreen()));
+                                        builder: (context) => LatestNewsPage()));
                               }
                               else{
                                 toast("NO");
