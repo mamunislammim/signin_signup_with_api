@@ -15,81 +15,207 @@ class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.tealAccent,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          Center(
-              child: InkWell(
-                  onTap: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.setString("token", '');
+        backgroundColor: const Color(0xabffffff),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          actions: [
+            Center(
+                child: InkWell(
+                    onTap: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.setString("token", '');
                       const SplashScreen().launch(context);
-                  },
-                  child: const Text("Log Out"))),
-          const SizedBox(
-            width: 10,
-          ),
-        ],
-      ),
-      body: SafeArea(
-          child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Card(
-              color: Colors.orange,
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(color: Colors.white, width: 5),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Text(
-                  "You Are \n         SuccessFull....",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                ),
-              ),
+                    },
+                    child: Container(
+                        padding: EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.blueGrey,
+                        ),
+                        child: const Text("Log Out")))),
+            const SizedBox(
+              width: 10,
             ),
-
-            const SizedBox(height: 20,),
-            FutureBuilder<GetDataModel>(
-                future: GetData().GetAllData(),
-                builder: (_, snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          " Name : ${snapshot.data?.data?.user?.name}" ?? '',
-                          style:   const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
-                        ),
-                        Text(
-                          snapshot.data?.data?.user?.email ?? '',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
-                        ),
-                        Text(
-                          snapshot.data?.data?.user?.updatedAt?? '',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
-                        ),
-                        Text(
-                          snapshot.data?.data?.user?.phone.toString() ?? '',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
-                        ),
-                      ],
-                    );
-                  }
-                  else {
-                     return const CircularProgressIndicator();
-                  }
-                },)
           ],
         ),
-      )),
-    );
+        body: FutureBuilder<GetDataModel>(
+          future: GetData().GetAllData(),
+          builder: (_, snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.topLeft,
+                    children: [
+                      Container(
+                        height: 150,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                          color: Colors.teal,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.redAccent,
+                                blurRadius: .5,
+                                spreadRadius: .6)
+                          ],
+                          image: DecorationImage(
+                            opacity: .5,
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                "https://scontent.fdac136-1.fna.fbcdn.net/v/t39.30808-6/295682003_582279973295891_3884008506104133137_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3f864&_nc_ohc=YorYtedRGwkAX82_bGw&_nc_oc=AQkFuRj-OtMZbRduVLlMxJKq_vUyf6iuSiaUTVoNB6Tl0Gz4-an51VG-5LKKpvxCusA&_nc_ht=scontent.fdac136-1.fna&oh=00_AfDzaF9wt2fsoe-BCLPI2-4S4Rdvg2fcDTJW-eHnA94pfA&oe=637BCCF7"),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 100,
+                        left: 10,
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              radius: 45,
+                              backgroundImage: NetworkImage(
+                                  "https://scontent.fdac136-1.fna.fbcdn.net/v/t39.30808-6/295682003_582279973295891_3884008506104133137_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3f864&_nc_ohc=YorYtedRGwkAX82_bGw&_nc_oc=AQkFuRj-OtMZbRduVLlMxJKq_vUyf6iuSiaUTVoNB6Tl0Gz4-an51VG-5LKKpvxCusA&_nc_ht=scontent.fdac136-1.fna&oh=00_AfDzaF9wt2fsoe-BCLPI2-4S4Rdvg2fcDTJW-eHnA94pfA&oe=637BCCF7"),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 5, bottom: 5, left: 8, right: 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.redAccent,
+                                  ),
+                                  child: Text(
+                                    snapshot.data!.data!.user!.name
+                                        .toString()
+                                        .toUpperCase(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Card(
+                    color: const Color(0xffe14545),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    shadowColor: Colors.redAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: const [
+                              Text(
+                                "960",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              Text(
+                                "Points",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: const [
+                              Text(
+                                "350",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              Text(
+                                "Followers",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: const [
+                              Text(
+                                "300",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              Text(
+                                "Following",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Card(
+                    color: const Color(0x5962A4B6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    shadowColor: Colors.redAccent,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                "Name : ${snapshot.data!.data!.user!.name.toString()}"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                " E-mail : ${snapshot.data!.data!.user!.email.toString()}"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                "Phone : ${snapshot.data!.data!.user!.phone.toString()}"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                "Updated At : ${snapshot.data!.data!.user!.updatedAt.toString()}"),
+                          ),
+                        ]),
+                  ),
+                ],
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
+        ));
   }
 }

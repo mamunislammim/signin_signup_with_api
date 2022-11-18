@@ -9,48 +9,50 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     // extendBody: true,
-      extendBodyBehindAppBar: true,
-      //resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      backgroundColor: Colors.blueGrey,
-      body: FutureBuilder<NewsDetailsModels>(
-        future: NewsDetailsRepo().getDetails(newsId),
-        builder: (_, snapshot) {
-          if (snapshot.hasData) {
-            return  ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                Image.network(snapshot.data!.data!.image![0]),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    snapshot.data!.data!.title.toString(),
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                HtmlWidget(
-                    snapshot.data!.data!.description.toString(),
-                    textStyle: const TextStyle(
-                      backgroundColor: Colors.transparent,
-                      color: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+       // extendBody: true,
+        extendBodyBehindAppBar: true,
+        //resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+        ),
+        backgroundColor: const Color(0xff185a73),
+        body: FutureBuilder<NewsDetailsModels>(
+          future: NewsDetailsRepo().getDetails(newsId),
+          builder: (_, snapshot) {
+            if (snapshot.hasData) {
+              return  ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  Image.network(snapshot.data!.data!.image![0]),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      snapshot.data!.data!.title.toString(),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
                     ),
-                ),
-                ],
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+                  ),
+                  HtmlWidget(renderMode: RenderMode.listView,
+                    snapshot.data!.data!.description.toString(),
+                      textStyle: const TextStyle(
+                        backgroundColor: Colors.red,
+                        color: Colors.greenAccent,
+                      ),
+                  ),
+                  ],
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:signup_signin_ui_design/Authentication/AuthSignUp/sign_up_auth.dart';
-import 'package:signup_signin_ui_design/Screen/third_screen.dart';
-
-import 'latestNews.dart';
+import 'package:signup_signin_ui_design/Screen/screenSelect.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -164,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  LatestNewsPage()));
+                                  builder: (context) =>  SelectScreen()));
                         } else {
                           EasyLoading.showError("Something Was Wrong");
                           toast("Error");

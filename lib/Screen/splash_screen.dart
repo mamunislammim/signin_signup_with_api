@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:signup_signin_ui_design/Screen/screenSelect.dart';
 import 'package:signup_signin_ui_design/Screen/sign_in.dart';
 import 'package:signup_signin_ui_design/Screen/third_screen.dart';
 
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     else {
       await Future.delayed(const Duration(seconds: 5))
-          .then((value) => const LatestNewsPage().launch(context));
+          .then((value) => const SelectScreen().launch(context));
     }
   }
 
